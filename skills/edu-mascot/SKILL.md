@@ -7,10 +7,14 @@ description: Integrate Edu, Eduport's existing animated SVG mascot, into an app 
 
 Bring the original Edu into the user's app. Preserve the orange felt pear silhouette, two-leaf sprout, bead eyes, coral cheeks, stitched smile, palette and proportions. The bundled code is the implementation; do not recreate Edu with emoji, generated art or approximate shapes.
 
+## Rights
+
+Implementation code and documentation are [MIT](LICENSE); Edu artwork and embedded artistic data are [reserved](ARTWORK-RIGHTS.md). This skill is not an artwork license. Proceed within any existing authorization to use Edu. If that authorization is unclear, resolve it before copying the character into another project; unrelated implementation work can continue. The MIT code can be reused with separately authorized artwork. Carry both notices when sharing this skill.
+
 ## Integrate
 
 1. Inspect the app's framework, component lifecycle, styling and existing mascot placement. Follow the requested scope. If no placement is specified, start with one modest, unobtrusive companion.
-2. Read [the integration guide](references/integration.md) for the API and lifecycle. Copy the required files from `assets/` into the app: `mascot.js`, `mascot-art.js`, `mascot.css`, and `theme.css` (or map its tokens into existing root theme tokens). Preserve relative module filenames. The skill works without the original repo checkout.
+2. Read [the integration guide](references/integration.md) for the API and lifecycle. Copy the required files from `assets/` into the app: `mascot.js`, `mascot-art.js`, `mascot.css`, and `theme.css` (or map its tokens into existing root theme tokens). Include `LICENSE` and `ARTWORK-RIGHTS.md` with copied assets, preserving any separate artwork permission. Preserve relative module filenames. The skill works without the original repo checkout.
 3. Load on the client after mount. The module accesses browser globals at import time. Append `mascot(pose, options).el` to an explicitly sized host; retain the controller. On unmount, call `destroy()`. In async client initialization, guard against the component unmounting before import completes.
 4. Connect only relevant app events: loading → thinking, completion → happy/cheer, focus → curious. Keep tap copy short and app-appropriate with `setLines`. Use `autoplay` sparingly; honor reduced motion and offscreen pausing.
 5. Test the rendered result, used expressions, mobile sizing, reduced motion, multiple instances and cleanup. Important actions/status need accessible app controls/text. The mascot's pointer interactions do not provide keyboard access by themselves.

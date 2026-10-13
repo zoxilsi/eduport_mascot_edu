@@ -11,4 +11,8 @@ for source in sorted((ROOT / "assets").iterdir()):
             sys.exit(f"Skill drift: {source.name}. Run scripts/sync_skill.py")
 if (ROOT / "docs/integration.md").read_bytes() != (ROOT / "skills/edu-mascot/references/integration.md").read_bytes():
     sys.exit("Skill guide drift. Run scripts/sync_skill.py")
-print("Skill copies match canonical files.")
+for name in ("LICENSE", "ARTWORK-RIGHTS.md"):
+    target = ROOT / "skills/edu-mascot" / name
+    if not target.exists() or target.read_bytes() != (ROOT / name).read_bytes():
+        sys.exit(f"Skill license drift: {name}. Run scripts/sync_skill.py")
+print("Skill copies and licensing notices match canonical files.")

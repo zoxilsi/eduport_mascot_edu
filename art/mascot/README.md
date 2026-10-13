@@ -1,5 +1,7 @@
 # Edu, Eduport's study buddy (final mascot)
 
+Edu artwork is reserved. See [artwork rights](../../ARTWORK-RIGHTS.md) before reusing the character.
+
 1. Edu is a small study buddy sewn from Eduport-orange felt: a soft pear with a two-leaf seedling on its crown, because learning grows.
 2. It is calm and kind, never loud. It has low-set bead eyes, coral cheeks and a stitched smile. It peeks over an ask box, perches on cards and waves hello.
 3. It is pure SVG. Layered gradients give the volume, one felt filter textures the body, and the glossy bead eyes sit on top. One stylesheet animates every pose.

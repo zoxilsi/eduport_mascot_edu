@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Implementation: MIT. Edu drawing geometry/artistic data: reserved; see ARTWORK-RIGHTS.md.
 """Eduport mascot "felt sprout" (Pip): generator for the final SVG set.
 
     python3 -I build.py        writes ../*.svg

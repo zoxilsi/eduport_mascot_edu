@@ -2,9 +2,13 @@
 
 Edu is a browser-native SVG + CSS + JavaScript character. The core has no framework or network dependencies. The artwork and runtime are the originals from Eduport.
 
+## Rights before integration
+
+Implementation code and documentation are MIT. Edu artwork is reserved, including the SVG strings inside `mascot-art.js`, generator drawing data and rendered media. Read `LICENSE` and `ARTWORK-RIGHTS.md` at the repository or bundled skill root. Use the character in another project only within separate permission. These examples explain the implementation; they do not grant artwork rights. The MIT runtime can also be adapted to your own authorized artwork.
+
 ## Web setup
 
-Copy `assets/` to a served directory. Load `theme.css` before `mascot.css`; customize the theme tokens on `:root`, because speech and particles use a body-level overlay. Create a host such as `<div id="edu"></div>` and give it `width: 160px` in your stylesheet. Import `mascot.js` from a `<script type="module">` or a client-side component.
+Copy `assets/` to a served directory, carrying `LICENSE` and `ARTWORK-RIGHTS.md` with it and preserving any separate artwork permission. Load `theme.css` before `mascot.css`; customize the theme tokens on `:root`, because speech and particles use a body-level overlay. Create a host such as `<div id="edu"></div>` and give it `width: 160px` in your stylesheet. Import `mascot.js` from a `<script type="module">` or a client-side component.
 
 ```js
 import { mascot, watchInput } from './assets/mascot.js';
