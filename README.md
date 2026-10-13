@@ -3,51 +3,51 @@
 </p>
 
 <p align="center">
-  <strong>A little study buddy. A lot of personality.</strong><br />
-  Original SVG artwork · expressive motion · zero runtime dependencies
+  <strong>Meet Edu. Your little study buddy.</strong><br />
+  A warm, playful companion built for Eduport’s learning experience.
 </p>
 
 <p align="center">
-  <a href="#try-edu">Try Edu</a> ·
-  <a href="#build-with-your-ai">AI prompt</a> ·
-  <a href="skills/edu-mascot/SKILL.md">Agent skill</a> ·
+  <a href="#what-is-edu">About</a> ·
+  <a href="#where-edu-lives">Where it’s used</a> ·
+  <a href="#use-the-skill">Get the skill</a> ·
   <a href="docs/integration.md">Developer guide</a>
 </p>
 
-## Try Edu
+## What is Edu?
+
+- **A character with personality** — orange felt, a tiny green sprout and a friendly face.
+- **Seven original poses** — peeking, sitting, reading, searching, writing and two avatars.
+- **Made to respond** — waves, blinks, thinks, cheers, talks and follows your cursor.
+- **Ready for coding assistants** — original assets, animation code and integration instructions in one portable skill.
+
+## Where Edu lives
+
+In Ask Eduport, Edu accompanies learners across:
+
+- **The home page** — greeting visitors and traveling between sections as they scroll.
+- **Learning cards** — a book for explanations, a pencil for practice and a magnifier for discovery.
+- **Chat** — reacting to typing, thinking during answers and presenting follow-up ideas.
+- **Learning flows** — celebrating quiz answers and accompanying class videos.
+
+## Use the skill
+
+**1. Install** from your project’s terminal using the [Skills CLI](https://github.com/vercel-labs/skills) (requires Node.js and Git):
 
 ```sh
-git clone https://github.com/zoxilsi/eduport_mascot_edu.git
-cd eduport_mascot_edu
-python3 -m http.server 8080
+npx skills add zoxilsi/eduport_mascot_edu --skill edu-mascot
 ```
 
-Open **http://localhost:8080**. Explore seven poses, expressions, reactions and speech. No build step or API key.
+**2. Choose your coding assistant** when the installer asks.
 
-## Add a little Edu
+**3. Give it this prompt:**
 
-The code is [MIT](LICENSE). Edu’s [artwork is reserved](ARTWORK-RIGHTS.md); get permission before using the character in another project.
+> Use the edu-mascot skill to add Edu to this app. Use the artwork only with permission, preserve its original design and animations, and adapt the integration to my framework.
 
-With artwork permission, copy `assets/` and both license notices into your app. Load `theme.css` and `mascot.css`, then run this in a browser module:
+The skill includes the assets and instructions your assistant needs. [Explore the skill →](skills/edu-mascot/SKILL.md)
 
-```js
-import { mascot } from './assets/mascot.js';
+---
 
-const edu = mascot('sit', { follow: true, label: 'Edu' });
-document.querySelector('#edu').append(edu.el); // give this host a width
-edu.autoplay(true);
-edu.say('Let’s learn something new!');
-// On unmount: edu.destroy();
-```
-
-**Blink · wave · think · cheer · talk · follow your cursor.** Flying and scroll choreography are included as an optional, app-specific integration.
-
-## Build with your AI
-
-Paste this into your coding assistant:
-
-> Add Edu from https://github.com/zoxilsi/eduport_mascot_edu to this app. Read `skills/edu-mascot/SKILL.md` and `docs/integration.md`. Use Edu’s artwork only with permission; keep its original design and motion. Adapt to my stack, keep reduced-motion support, and clean up on unmount. Start with one mascot in a suitable place. Preserve Edu’s design and show me the result.
-
-Want a reusable skill? Copy [`skills/edu-mascot/`](skills/edu-mascot/) into your agent’s skills directory. For Codex, use `~/.codex/skills/edu-mascot/`, then ask: **“Use $edu-mascot to add Edu to this app.”** Assets and instructions are bundled together.
-
-<p align="center"><sub>Made for Eduport. Code: MIT · Edu artwork: reserved. 🌱</sub></p>
+<p align="center">
+  <sub>Made for Eduport 🌱 · <a href="LICENSE">Code: MIT</a> · <a href="ARTWORK-RIGHTS.md">Edu artwork: reserved; permission required</a></sub>
+</p>
