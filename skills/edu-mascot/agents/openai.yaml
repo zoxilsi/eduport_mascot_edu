@@ -1,0 +1,4 @@
+interface:
+  display_name: "Edu Mascot"
+  short_description: "Add the original animated Edu to your app"
+  default_prompt: "Use $edu-mascot to integrate Edu into this app, preserving its original design and motion."

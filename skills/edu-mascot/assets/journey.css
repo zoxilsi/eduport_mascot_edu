@@ -1,0 +1,133 @@
+/* Edu's journey (assets/journey.js): the seats Edu sits in, the sky it flies through, the
+   spinning sprout (the sprout-copter), the puffs it leaves behind, and the chat box's Edu
+   waiting for it to land.
+
+   Transforms and opacity only. Colours: tokens, plus the sprout's own sage from the mascot's
+   palette (art/mascot/README.md). The one loop (the arms flapping) runs only during a flight,
+   and with reduced motion Edu never flies, so none of it runs. */
+
+/* --- seats: each station keeps Edu's size even while Edu is away, so nothing shifts -------- */
+.edu-seat { position: relative; display: block; width: 100%; line-height: 0; }
+.edu-seat--peek { aspect-ratio: 240 / 120; }
+.edu-seat--sit { aspect-ratio: 180 / 200; }
+.edu-seat > .mascot { position: absolute; left: 0; top: 0; width: 100%; }
+
+/* --- the sky: one layer over the screen (fixed) that Edu flies in; journey.js draws each flight
+   at its place on the screen every frame. The trail (puffs, sparkles) is on the page instead, so it
+   scrolls away with it. ------------------------------------------------------------------------ */
+.edu-sky {
+  position: fixed; left: 0; top: 0; z-index: 30; width: 100%; height: 0;
+  overflow: visible; overflow-x: clip; pointer-events: none;
+}
+.edu-trail {
+  position: absolute; left: 0; top: 0; z-index: 30; width: 100%; height: 0;
+  overflow: visible; overflow-x: clip; pointer-events: none;
+}
+/* the flight onto the chat box passes over the chat as it opens */
+.edu-sky.is-over-chat { z-index: 55; }
+/* the intro on phones: Edu passes behind the ask box and the chips (the hero over its layer) */
+.hero.edu-under { z-index: 31; }
+/* while Edu is behind a ledge, journey.js sets this layer's height to the ledge's page y: it clips
+   all that is below (only when the ledge changes, never per frame) */
+.edu-ledge { position: absolute; left: 0; top: 0; width: 100%; height: 0; overflow: visible; }
+.edu-ledge.is-on { overflow: hidden; overflow: clip; }
+.edu-flyer { position: absolute; left: 0; top: 0; line-height: 0; transform-origin: 0 0; will-change: transform; }
+.edu-body, .edu-squash { position: relative; line-height: 0; }
+.edu-body { transform-origin: 50% 58%; }
+.edu-squash { transform-origin: 50% 100%; }
+
+/* the sprout-copter: an unfiltered copy of the sprout laid over the drawing's own (hidden in flight) */
+.edu-rotor {
+  position: absolute; left: 39.78%; top: 5.44%; width: 20.44%; height: 16.56%;
+  transform-origin: 50% 100%; will-change: transform;
+}
+.edu-rotor svg { display: block; width: 100%; height: 100%; overflow: visible; }
+/* the blur of the spinning leaves */
+.edu-disc {
+  position: absolute; left: 40.6%; top: 8.4%; width: 18.9%; height: 3.6%; border-radius: 50%;
+  border: 1.2px solid rgba(175, 211, 138, 0.8); background: rgba(175, 211, 138, 0.12); opacity: 0;
+}
+
+/* Edu in flight: the moods rest, the arms go up ("wheee!"), the mouth opens, the shadow stays
+   behind on the ground, and the rotor spins in place of the sprout. */
+.edu-sky .mascot .m-mood, .edu-sky .mascot .m-act, .edu-sky .mascot .m-stage, .edu-sky .mascot .m-dip {
+  animation: none; transform: none;
+}
+.edu-sky .mascot .m-accessory { opacity: 0; animation: none; }
+.edu-sky .mascot .m-shadow { opacity: 0; animation: none; }
+.edu-sky .mascot--sit[data-hands*="r"] .m-hand-r {
+  transform: rotate(-56deg); animation: edu-arms-r 0.22s ease-out both, edu-flap-r 0.34s 0.22s ease-in-out infinite alternate;
+}
+.edu-sky .mascot--sit[data-hands*="l"] .m-hand-l {
+  transform: rotate(56deg); animation: edu-arms-l 0.22s ease-out both, edu-flap-l 0.34s 0.22s ease-in-out infinite alternate;
+}
+@keyframes edu-arms-r { from { transform: none; } to { transform: rotate(-46deg); } }
+@keyframes edu-arms-l { from { transform: none; } to { transform: rotate(46deg); } }
+@keyframes edu-flap-r { from { transform: rotate(-46deg); } to { transform: rotate(-68deg); } }
+@keyframes edu-flap-l { from { transform: rotate(46deg); } to { transform: rotate(68deg); } }
+.edu-sky .mascot .m-mouth { opacity: 0; }
+.edu-sky .mascot .m-mouth-open { display: inline; }
+.edu-sky .mascot .m-eye { transform: scale(1.06); }
+
+/* --- the trail: puffs of air from the rotor and a few sparkles ------------------------------ */
+.edu-puff, .edu-spark { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.edu-puff::before, .edu-spark::before { content: ""; position: absolute; opacity: 0; }
+.edu-puff::before {
+  left: -4px; top: -4px; width: 8px; height: 8px; border-radius: 50%; background: var(--faint);
+  animation: edu-puff 0.56s ease-out forwards;
+}
+.edu-spark::before {
+  left: -4.5px; top: -4.5px; width: 9px; height: 9px; background: var(--brand);
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  animation: edu-spark 0.62s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+@keyframes edu-puff {
+  0% { opacity: 0.42; transform: scale(0.4); }
+  100% { opacity: 0; transform: translate(var(--dx, 0), var(--dy, 12px)) scale(1.5); }
+}
+@keyframes edu-spark {
+  0% { opacity: 0; transform: scale(0.2); }
+  25% { opacity: 1; transform: translate(calc(var(--dx, 0) * 0.3), calc(var(--dy, 0) * 0.3)) scale(1) rotate(45deg); }
+  100% { opacity: 0; transform: translate(var(--dx, 0), var(--dy, 0)) scale(0.3) rotate(120deg); }
+}
+
+/* --- the chat box: its Edu appears as the flying one lands ---------------------------------- */
+.dock-perch.edu-away > .mascot { visibility: hidden; }
+
+/* --- tapping Edu on a card: the giggle, never the card's question ------------------------
+   The hover lift would make .mock a stacking context and trap the perch under the row's
+   stretched button (.bento-btn::after), so a tap on Edu asked the card's question. */
+.bento-row:hover .bento-art .mock:has(.edu-seat > .mascot) { transform: none; }
+
+/* --- phones: every perch on the same side, so a flight never sweeps across the card --------- */
+@media (max-width: 860px) {
+  .bento-row.flip .bento-perch { left: auto; right: 18px; }
+}
+
+/* --- the words never go under Edu ----------------------------------------------------------
+   Edu stands on the chat box and reaches above its top edge, over the bottom of the thread (its
+   whole body on wide screens, just its head on phones, where it stands behind the box). That band
+   of the thread is see-through, with a short fade above it, so a line scrolling down to the box
+   fades out before it reaches Edu, wherever Edu rides along the edge; the room under the last
+   answer lets the last line scroll clear of it. --edu-band: how far Edu reaches into the thread
+   (measured: 45px wide, 20px on phones). */
+.thread {
+  --edu-band: 48px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--edu-band) - 36px), transparent calc(100% - var(--edu-band)));
+  mask-image: linear-gradient(to bottom, #000 calc(100% - var(--edu-band) - 36px), transparent calc(100% - var(--edu-band)));
+}
+/* --- the chat on phones: one thinking cloud (the answer's face has it), and two Edus at most
+   (the switch knob is already Edu's face, so the header avatar steps aside) ------------------- */
+@media (max-width: 767px) {
+  .dock-perch .m-think { display: none; }
+  .thread { --edu-band: 22px; padding-bottom: 64px; }
+  .sheet-avatar { display: none; }
+}
+/* room for a quiz line when the thread is already at its end (journey.js chatLife) */
+.thread.edu-room { padding-bottom: 96px; }
+.dock-perch { will-change: transform; }
+
+/* --- reduced motion: no flights, no particles; Edu is simply at its spots ------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .edu-sky, .edu-trail, .edu-puff, .edu-spark { display: none; }
+}

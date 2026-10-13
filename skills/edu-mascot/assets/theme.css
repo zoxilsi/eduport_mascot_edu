@@ -1,0 +1,20 @@
+/* Define on :root: speech bubbles are mounted outside the mascot host. */
+:root {
+  --brand: #fb6514;
+  --surface-2: #191816;
+  --sunken: #141311;
+  --line: #39352f;
+  --heading: #fff5e9;
+  --muted: #c0b5a6;
+  --faint: #887e72;
+  --shadow-1: 0 8px 30px #0003;
+  --font-sans: system-ui, sans-serif;
+}
+:root[data-theme="light"] {
+  --surface-2: #fff;
+  --sunken: #fff;
+  --line: #ded4c8;
+  --heading: #30251e;
+  --muted: #77695d;
+  --faint: #998c80;
+}
