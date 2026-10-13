@@ -12,9 +12,12 @@ if len(paths) < 2:
     sys.exit('Need at least two numbered PNG frames.')
 frames = [Image.open(p).convert('RGB').resize((880, 387), Image.Resampling.LANCZOS) for p in paths]
 # One shared palette keeps the stationary background from flickering.
-atlas = Image.new('RGB', (880, 387 * 3))
+atlas = Image.new('RGB', (880, 387 * 4))
 for i, index in enumerate([0, len(frames)//2, len(frames)-1]):
     atlas.paste(frames[index], (0, 387*i))
+# Give the tiny sage sprout enough palette weight to retain its original green.
+sprout = frames[0].crop((650, 74, 720, 123)).resize((880, 387))
+atlas.paste(sprout, (0, 387*3))
 palette = atlas.quantize(colors=256)
 indexed = [frame.quantize(palette=palette, dither=Image.Dither.NONE) for frame in frames]
 indexed[0].save(root / 'docs/edu.gif', save_all=True, append_images=indexed[1:],
